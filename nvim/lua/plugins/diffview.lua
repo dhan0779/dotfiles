@@ -6,8 +6,8 @@ return {
     { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
   },
   opts = {
-    enhanced_diff_hl = true,  -- See better diff highlights
-    use_icons = true,         -- Requires nvim-web-devicons
-    show_help_hints = false,  -- Hide the "Help: g?" hint in the panels
+    enhanced_diff_hl = true,
+    use_icons = true,
+    show_help_hints = false,
   },
 }
