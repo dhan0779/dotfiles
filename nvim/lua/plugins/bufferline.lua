@@ -6,13 +6,13 @@ return {
     config = function()
       require("bufferline").setup({
         highlights = {
-          buffer_selected = { sp = "#ffffff", underline = true },
-          modified_selected = { sp = "#ffffff", underline = true },
-          numbers_selected = { sp = "#ffffff", underline = true },
-          diagnostic_selected = { sp = "#ffffff", underline = true },
-          info_selected = { sp = "#ffffff", underline = true },
-          warning_selected = { sp = "#ffffff", underline = true },
-          error_selected = { sp = "#ffffff", underline = true },
+          buffer_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          modified_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          numbers_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          diagnostic_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          info_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          warning_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
+          error_selected = { sp = "#ffffff", underline = true, italic = false, bold = true },
         },
         options = {
           mode = "buffers",
