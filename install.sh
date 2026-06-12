@@ -32,7 +32,11 @@ brew install \
 info "Installing apps and fonts..."
 brew install --cask \
   ghostty \
-  font-jetbrains-mono-nerd-font
+  font-jetbrains-mono-nerd-font \
+  || brew upgrade --cask \
+    ghostty \
+    font-jetbrains-mono-nerd-font \
+  || true
 
 link() {
   local src="$1" dest="$2"
