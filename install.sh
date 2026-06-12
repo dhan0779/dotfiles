@@ -29,14 +29,18 @@ brew install \
   fd \
   tree-sitter-cli
 
+install_cask() {
+  local cask="$1"
+  if brew list --cask "$cask" &>/dev/null; then
+    brew upgrade --cask "$cask" || true
+  elif ! brew install --cask "$cask" 2>/dev/null; then
+    info "Skipping $cask (already present outside Homebrew)"
+  fi
+}
+
 info "Installing apps and fonts..."
-brew install --cask \
-  ghostty \
-  font-jetbrains-mono-nerd-font \
-  || brew upgrade --cask \
-    ghostty \
-    font-jetbrains-mono-nerd-font \
-  || true
+install_cask ghostty
+install_cask font-jetbrains-mono-nerd-font
 
 link() {
   local src="$1" dest="$2"
@@ -63,4 +67,4 @@ fi
 EOF
 fi
 
-info "Done. Open a new Ghostty window and launch nvim."
+info "Done. Run 'source ~/.zshrc' and launch nvim."
