@@ -37,8 +37,7 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
       callback = function()
-        -- Enable native Neovim treesitter highlighting
-        vim.treesitter.start()
+        if not pcall(vim.treesitter.start) then return end
 
         -- Configure code folding
         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
