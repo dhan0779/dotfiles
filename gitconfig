@@ -1,0 +1,46 @@
+[user]
+  name = David Han
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = git://github.com/
+
+[alias]
+	force-default-branch = "!f() { git config set \"branch.overridden-default\" \"${1}\"; }; f"
+	unforce-default-branch = config unset "branch.overridden-default"
+
+	# The default branch becomes
+	default-branch = ! git config get --default $(git rev-parse --abbrev-ref origin/HEAD | sed 's|^origin/||') branch.overridden-default
+
+	up = "!f() { git pull --rebase origin \"${1:-$(git default-branch)}\"; }; f"
+
+	pushf = push --force-with-lease
+
+	sweep = ! git prune && git remote prune origin && git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | grep --extended-regexp --invert-match '^$' | xargs git branch --delete --force && git gc --quiet
+
+[branch]
+	sort = -committerdate
+
+[pull]
+	rebase = merges
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[rebase]
+	autosquash = true
+	updateRefs = true
+
+[log]
+	abbrevCommit = true
+
+[color]
+	ui = true
+
+# Machine-local overrides (not committed — email, signing key, work includes)
+[include]
+	path = ~/.gitconfig.local

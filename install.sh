@@ -55,16 +55,17 @@ link() {
 
 link "$DOTFILES_DIR/nvim"           "$HOME/.config/nvim"
 link "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+link "$DOTFILES_DIR/zshrc"          "$HOME/.zshrc"
+link "$DOTFILES_DIR/gitconfig"      "$HOME/.gitconfig"
 
-ZSHRC="$HOME/.zshrc"
-if [ -f "$ZSHRC" ] && ! grep -qF "export TERM=xterm-ghostty" "$ZSHRC"; then
-  info "Adding Ghostty terminfo guard to ~/.zshrc"
-  cat >> "$ZSHRC" <<'EOF'
-
-if [[ "$TERM_PROGRAM" == "ghostty" ]] && infocmp xterm-ghostty &>/dev/null; then
-  export TERM=xterm-ghostty
+if [ ! -f "$HOME/.zshrc.local" ]; then
+  info "No ~/.zshrc.local found — creating a blank one for machine-local overrides"
+  touch "$HOME/.zshrc.local"
 fi
-EOF
+
+if [ ! -f "$HOME/.gitconfig.local" ]; then
+  info "No ~/.gitconfig.local found — creating a blank one for machine-local overrides"
+  touch "$HOME/.gitconfig.local"
 fi
 
 info "Done. Run 'source ~/.zshrc' and launch nvim."
